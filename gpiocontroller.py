@@ -52,3 +52,5 @@ while True:
             data[index]["available"] = True if GPIO.input(chan) == 1 else False
             data[index]["plateNo"] = plates[index]
     r = requests.put('http://10.148.75.58:8080/parking', json=data)
+
+GPIO.cleanup()
