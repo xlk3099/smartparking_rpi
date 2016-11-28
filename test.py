@@ -9,9 +9,25 @@ ir_prev_values = [1, 1, 1]
 output_chan_list = [22, 24, 26]
 
 GPIO.setup(output_chan_list, GPIO.OUT, initial=GPIO.HIGH)
-
+data = {
+    1: {
+        'id': 1,
+        'available': True,
+        'plateNo': ''
+    },
+    2: {
+        'id': 2,
+        'available': True,
+        'plateNo': ''
+    },
+    3: {
+        'id': 3,
+        'available': True,
+        'plateNo': ''
+    }
+}
 while True:
-    for index, _ in enumerate(input_chan_list):
+    for index, chan in enumerate(input_chan_list):
         if GPIO.input(chan) == 0:
             GPIO.output(output_chan_list[index], GPIO.LOW)
         else:
