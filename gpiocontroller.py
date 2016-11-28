@@ -12,7 +12,7 @@ GPIO.setup(input_chan_list, GPIO.IN)
 ir_prev_values = [1, 1, 1]
 # Define the GPIO output ports for controllering LEDS
 output_chan_list = [22, 24, 26]
-GPIO.setup(output_chan_list, GPIO.OUT, initial=1)
+GPIO.setup(output_chan_list, GPIO.OUT, initial=GPIO.HIGH)
 
 # Data to send
 
