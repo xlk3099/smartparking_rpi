@@ -50,7 +50,7 @@ while True:
             else:
                 GPIO.output(output_chan_list[index], GPIO.HIGH)
     plates = camera.recognizePlate()
-    for key, value in plates:
+    for key, value in plates.items():
         data[key]["available"] = True if GPIO.input(chan) == 1 else False
         data[key]["plateNo"] = value
     r = requests.put('http://10.148.75.58:8080/parking', json=data)
