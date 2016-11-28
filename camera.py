@@ -8,7 +8,7 @@ class Camera:
         camera.rotation = 180
         camera.hflip = True
 
-    def recognizePlate():
+    def recognizePlate(self):
         camera.capture('images/1.jpg')
         alpr = Alpr("us", "/etc/openalpr/openalpr.conf", "/usr/share/openalpr/runtime_data")
         if not alpr.is_loaded():
@@ -55,3 +55,4 @@ class Camera:
             pos += 1
         # alpr.unload()
         return res
+

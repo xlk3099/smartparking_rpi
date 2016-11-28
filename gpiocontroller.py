@@ -6,12 +6,12 @@ import requests
 GPIO.setmode(GPIO.BCM)
 
 # Define the GPIO input ports for IR sensors
-input_chan_list = [21, 22, 27]
+input_chan_list = [8, 10, 12]
 GPIO.setup(input_chan_list, GPIO.IN)
 
 ir_prev_values = [1, 1, 1]
 # Define the GPIO output ports for controllering LEDS
-output_chan_list = [23, 24, 25]
+output_chan_list = [22, 24, 26]
 GPIO.setup(output_chan_list, GPIO.OUT, initial=1)
 
 # Data to send
