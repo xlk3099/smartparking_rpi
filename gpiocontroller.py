@@ -4,7 +4,7 @@ import requests
 import thread
 
 # Set GPIO mode to BCM
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 # Define the GPIO input ports for IR sensors
 input_chan_list = [8, 10, 12]
@@ -63,7 +63,7 @@ def take_snapshots():
         for key, value in plates.items():
             data[key]['plateNo'] = value
         r = requests.put('http://10.148.75.58:8080parking', json=data)
-        print(r.)
+        print(r.Response)
 
 try:
    thread.start_new_thread(detect_parking)
