@@ -20,16 +20,37 @@ def recognizePlate():
 
     results = alpr.recognize_file("images/1.jpg")
 
-    res = {1:"", 2:"",3:""}
+    nPos = 2
+    sepPos = [400, 800]
+    tmpPlate = {}
     i = 0
     for plate in results['results']:
         i += 1
-        res[i] = plate['candidates'][0]['plate']
+        x = plate['coordinates'][0]['x']
+        number = plate['candidates'][0]['plate']
+        tmpPlate[x] = number
         print("Plate #%d, (%d,%d)" % (i , plate['coordinates'][0]['x'], plate['coordinates'][0]['y']))
         print("   %12s %12s" % ("Plate", "Confidence"))
         for candidate in plate['candidates']:
             print(" %12s%12f" % (candidate['plate'], candidate['confidence']))
 
+    sortedKey = sorted(tmpPlate)
+         
+    res = {1:"", 2:"", 3:""}
+    nPlate = len(tmpPlate)
+    
+    pos = 0
+    keyIndex = 0
+    while pos < nPos and keyIndex < nPlate:
+        if sepPos[pos] > sortedKey[keyIndex]:
+            res[pos+1] = tmpPlate[sortedKey[keyIndex]]            
+            keyIndex += 1    
+        pos += 1
+
+    while keyIndex < nPlate:
+        res[pos + 1] = tmpPlate[sortedKey[keyIndex]]
+        keyIndex += 1
+        pos += 1
     #alpr.unload()
     print(res)
     return res
