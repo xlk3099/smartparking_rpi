@@ -54,5 +54,6 @@ class Camera:
             keyIndex += 1
             pos += 1
         # alpr.unload()
+        print(res)
         return res
 
