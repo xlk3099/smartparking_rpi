@@ -58,7 +58,7 @@ def take_snapshots():
         for key, value in plates.items():
             data[key]['plateNo'] = value
         r = requests.put('http://10.148.75.58:8080/parking', json=data)
-        print(r.)
+        print(r.status_code)
 
 try:
    thread.start_new_thread(detect_parking, ())
