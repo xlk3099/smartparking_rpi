@@ -45,7 +45,7 @@ while True:
             plates = camera.recognizePlate()
             if GPIO.input(chan) == 0:
                 # Update the status of LED
-                GPIO.output(output_chan_list(index), GPIO.LOW)
+                GPIO.output(output_chan_list[index], GPIO.LOW)
             # Take photo and send request
             else:
                 GPIO.output(output_chan_list(index), GPIO.HIGH)
