@@ -35,6 +35,8 @@ data = {
     }
 }
 
+camera = camera.Camera()
+
 while True:
     for index, chan in enumerate(input_chan_list):
         if GPIO.input(chan) != ir_prev_values[index]:
