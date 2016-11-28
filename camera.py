@@ -4,12 +4,12 @@ from openalpr import Alpr
 
 class Camera:
     def __init__(self):
-        camera = PiCamera()
-        camera.rotation = 180
-        camera.hflip = True
+        self.camera = PiCamera()
+        self.camera.rotation = 180
+        self.camera.hflip = True
 
     def recognizePlate(self):
-        camera.capture('images/1.jpg')
+        self.camera.capture('images/1.jpg')
         alpr = Alpr("us", "/etc/openalpr/openalpr.conf", "/usr/share/openalpr/runtime_data")
         if not alpr.is_loaded():
             print("Error loading OpenALPR")
