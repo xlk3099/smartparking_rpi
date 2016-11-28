@@ -18,7 +18,6 @@ GPIO.setup(output_chan_list, GPIO.OUT, initial=GPIO.HIGH)
 
 # Data to send
 
-
 data = {
     1: {
         'id': 1,
@@ -66,10 +65,12 @@ def take_snapshots():
         print(r.Response)
 
 try:
-   thread.start_new_thread(detect_parking)
-   thread.start_new_thread(take_snapshots)
+   thread.start_new_thread(detect_parking, ())
+   thread.start_new_thread(take_snapshots, ())
 except:
    print("Unable to start threads")
+while 1:
+    pass
 
 
 
