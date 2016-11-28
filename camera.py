@@ -29,7 +29,7 @@ def recognizePlate():
         x = plate['coordinates'][0]['x']
         number = plate['candidates'][0]['plate']
         tmpPlate[x] = number
-        print("Plate #%d, (%d,%d)" % (i , plate['coordinates'][0]['x'], plate['coordinates'][0]['y']))
+        print("Plate #%d, (%d,%d)(%d,%d)" % (i , plate['coordinates'][0]['x'], plate['coordinates'][0]['y'], plate['coordinates'][1]['x'], plate['coordinates'][1]['y']))
         print("   %12s %12s" % ("Plate", "Confidence"))
         for candidate in plate['candidates']:
             print(" %12s%12f" % (candidate['plate'], candidate['confidence']))
