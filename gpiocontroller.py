@@ -49,7 +49,9 @@ def detect_parking():
                 GPIO.output(output_chan_list[index], GPIO.HIGH)
             # update the status of car slots available or not 
             data[index+1]["available"] = True if GPIO.input(chan) == 1 else False
-
+	    r = requests.put('http://10.148.75.58:8080/parking', json=data)
+            print(r.status_code)
+		
 
 def take_snapshots():
     print("Camera process started")

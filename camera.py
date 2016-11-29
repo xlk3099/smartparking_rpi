@@ -5,8 +5,8 @@ from openalpr import Alpr
 class Camera:
     def __init__(self):
         self.camera = PiCamera()
-        self.camera.rotation = 180
-        self.camera.hflip = True
+        #self.camera.rotation = 180
+        #self.camera.hflip = True
 
     def recognizePlate(self):
         self.camera.capture('images/1.jpg')
@@ -21,7 +21,7 @@ class Camera:
         results = alpr.recognize_file("images/1.jpg")
 
         nPos = 2
-        sepPos = [400, 800]
+        sepPos = [259, 480]
         tmpPlate = {}
         i = 0
         for plate in results['results']:
