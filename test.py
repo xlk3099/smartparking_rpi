@@ -1,38 +1,20 @@
-class GlobalWealth(object):
-    def __init__(self):
-        self._global_wealth = 10.0
-        self._observers = []
+import RPi.GPIO as GPIO
 
-    def get_wealth(self):
-        return self._global_wealth
+GPIO.setmode(GPIO.BOARD)
+input_chan_list = [8, 10, 12]
+GPIO.setup(input_chan_list, GPIO.IN)
 
-    def set_wealth(self, value):
-        self._global_wealth = value
-        for callback in self._observers:
-            print 'anouncing change'
-            callback(self._global_wealth)
+ir_prev_values = [1, 1, 1]
+# Define the GPIO output ports for controllering LEDS
+output_chan_list = [22, 24, 26]
 
-    global_wealth = property(get_wealth, set_wealth)
+GPIO.setup(output_chan_list, GPIO.OUT, initial=GPIO.HIGH)
 
-    def bind_to(self, callback):
-        print 'bound'
-        self._observers.append(callback)
-
-
-class Person(object):
-    def __init__(self, data):
-        self.wealth = 1.0
-        self.data = data
-        self.data.bind_to(self.update_how_happy)
-        self.happiness = self.wealth / self.data.global_wealth
-
-    def update_how_happy(self, global_wealth):
-        self.happiness = self.wealth / global_wealth
-
-
-if __name__ == '__main__':
-    data = GlobalWealth()
-    p = Person(data)
-    print p.happiness
-    data.global_wealth = 10.0
-    print p.happiness
+while True:
+        # Update the status of LED
+        if GPIO.input(8) == 0:
+            GPIO.output(22, GPIO.LOW)
+        else:
+            GPIO.output(, GPIO.HIGH)
+        # update the status of car slots available or not 
+        data[index+1]["available"] = True if GPIO.input(chan) == 1 else False
