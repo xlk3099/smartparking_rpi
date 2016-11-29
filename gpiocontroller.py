@@ -9,13 +9,13 @@ GPIO.setmode(GPIO.BOARD)
 # Define the GPIO input ports for IR sensors
 input_chan_list = [8, 10, 12]
 GPIO.setup(input_chan_list, GPIO.IN)
+ir_prev_values = [1, 1, 1]
 
 # Define the GPIO output ports for controllering LEDS
 output_chan_list = [22, 24, 26]
 
 GPIO.setup(output_chan_list, GPIO.OUT, initial=GPIO.HIGH)
 
-# Data to send
 
 data = {
     1: {
@@ -42,15 +42,17 @@ def detect_parking():
     print("LED process started")
     while True:
         for index, chan in enumerate(input_chan_list):
-            # Update the status of LED
-            if GPIO.input(chan) == 0:
-                GPIO.output(output_chan_list[index], GPIO.LOW)
-            else:
-                GPIO.output(output_chan_list[index], GPIO.HIGH)
-            # update the status of car slots available or not 
-            data[index+1]["available"] = True if GPIO.input(chan) == 1 else False
-	    r = requests.put('http://10.148.75.58:8080/parking', json=data)
-            print(r.status_code)
+            if GPIO.input(chan) != ir_prev_values[index]:
+                ir_prev_values[index] = GPIO.input(chan)
+                # Update the status of LED
+                if GPIO.input(chan) == 0:
+                    GPIO.output(output_chan_list[index], GPIO.LOW)
+                else:
+                    GPIO.output(output_chan_list[index], GPIO.HIGH)
+                # update the status of car slots available or not 
+                data[index+1]["available"] = True if GPIO.input(chan) == 1 else False
+    	        r = requests.put('http://10.148.75.58:8080/parking', json=data)
+                print(r.status_code)
 		
 
 def take_snapshots():
