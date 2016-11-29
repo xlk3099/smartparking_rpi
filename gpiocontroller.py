@@ -4,7 +4,7 @@ import requests
 import thread
 
 # Set GPIO mode to BCM
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 # Define the GPIO input ports for IR sensors
 input_chan_list = [8, 10, 12]
@@ -17,7 +17,6 @@ output_chan_list = [22, 24, 26]
 GPIO.setup(output_chan_list, GPIO.OUT, initial=GPIO.HIGH)
 
 # Data to send
-
 
 data = {
     1: {
@@ -66,10 +65,12 @@ def take_snapshots():
         print(r.)
 
 try:
-   thread.start_new_thread(detect_parking)
-   thread.start_new_thread(take_snapshots)
+   thread.start_new_thread(detect_parking, ())
+   thread.start_new_thread(take_snapshots, ())
 except:
    print("Unable to start threads")
+while 1:
+    pass
 
 
 
